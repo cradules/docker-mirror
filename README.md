@@ -4,7 +4,7 @@ This small python scrip will help you to mirror images from docker hub to your E
 
 # Requirements
 
-Create filed config.ini in src folder with the form:
+- Create filed config.ini in src folder with the form:
 
 ```ini
 [reposiotry/imagename]
@@ -20,4 +20,11 @@ tag = "image tag"
 source-repository = "source repository"
 target-repository = "target repository"
 region = "aws region"
+```
+- Export on the environment that will run the docker image next env objects:
+
+```shell script
+AWS_DEFAULT_REGION="region"
+AWS_ACCESS_KEY_ID="access key"
+AWS_SECRET_ACCESS_KEY="secret key"
 ```
