@@ -63,7 +63,7 @@ for section in config.sections():
         print('Successfully pulled image ' + image_source)
         pull_image.tag(image_target)  # Tag image with repository target name and tag
         print('Successfully tag image ', image_source, " to ", image_target, sep="")
-        docker.images.push(image_target)
+        docker.images.push(image_target)  # Push image to ecr
         print('Successfully pushed image ', image_target, sep="")
 
     except ValueError:
