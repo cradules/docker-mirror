@@ -24,18 +24,18 @@ docker = docker.from_env()
 aws_default_region = os.environ.get('AWS_DEFAULT_REGION')
 ecr_client = boto3.client('ecr', region_name=aws_default_region)
 
-# Read variables from config.ini. This implies that only repository.ini should be modified for mirroring new images
+# Read variables from config.ini. This implies that only config.ini should be modified for mirroring new images
 config = configparser.ConfigParser()
 config.read("config.ini")
 
 
-# Login to ECR AWS Function. This will use credentials on ENV or you credential files from ~/.aws/credentials
+# Login to ECR AWS Function. This will use credentials from ENV or you credential files from ~/.aws/credentials
 def login_docker_client_to_aws_ecr():
     token = ecr_client.get_authorization_token()
     username, password = base64.b64decode(token['authorizationData'][0]['authorizationToken']).decode().split(':')
     registry = token['authorizationData'][0]['proxyEndpoint']
 
-    # Logging in via the docker sdk doesnt work so we're gonna go with this workaround
+    # Login via the docker sdk doesnt work so we're gonna go with this workaround
     command = 'docker login -u %s -p %s %s' % (username, password, registry)
 
     p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True, bufsize=1)
