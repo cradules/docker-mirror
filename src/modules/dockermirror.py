@@ -21,8 +21,11 @@ def run(file):
         image = items['image']  # Create variable with then name and tag of the pulled image
         image_source = (sr + "/" + image + ":" + tag)  # Create variable for source image
         repository = (project + "/" + image)
-        image_target = (
-                    misc.ecr_repository() + "/" + project + "/" + image + ":" + tag)  # Create variable for source image
+
+        # Create variable for target image
+        image_target = ""
+        if misc.cloud() == 'AWS':
+            image_target = (misc.ecr_host() + "/" + project + "/" + image + ":" + tag)
 
         try:
             docker_client.images.pull(image_source)  # Pull image from repository
@@ -30,7 +33,7 @@ def run(file):
             print('Successfully pulled image ' + image_source)
             pull_image.tag(image_target)  # Tag image with repository target name and tag
             print('Successfully tag image ', image_source, " to ", image_target, sep="")
-            # Create repository if not exists
+            # Create ECR repository on AWS if not exists
             dorepo.run(repository=repository)
             docker_client.images.push(image_target)  # Push image to ecr
             print('Successfully pushed image ', image_target, sep="")
