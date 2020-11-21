@@ -1,13 +1,26 @@
-import os
 import boto3
+import misc
 
 
-def run():
-    # Create boto3 ECR client
-    aws_default_region = os.environ.get('AWS_DEFAULT_REGION')
-    ecr_client = boto3.client('ecr', region_name=aws_default_region)
-    response = ecr_client.create_repository(
-        repositoryName='project-a/nginx-web-app',
-    )
+def check_repository(repository):
+    try:
+        # Create boto3 ECR client
+        ecr_client = boto3.client('ecr', region_name=misc.aws_default_region())
+        response = ecr_client.list_images(
+            repositoryName=repository,
+        )
+        return response
 
-    print(response)
+    except:
+        pass
+
+
+def run(repository):
+    if not check_repository(repository):
+        # Create boto3 ECR client
+        ecr_client = boto3.client('ecr', region_name=misc.aws_default_region())
+        response = ecr_client.create_repository(
+            repositoryName=repository,
+        )
+
+        return response
