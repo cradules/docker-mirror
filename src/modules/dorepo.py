@@ -22,5 +22,6 @@ def run(repository):
         response = ecr_client.create_repository(
             repositoryName=repository,
         )
-
         return response
+    else:
+        print('Repository {0} exists on host {1}'.format(repository, misc.ecr_host()))
