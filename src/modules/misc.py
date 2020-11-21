@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 
 def aws_default_region():
@@ -17,3 +18,17 @@ def ecr_host():
 
 def cloud():
     return str(os.environ.get('CLOUD'))
+
+
+def db_path():
+    path = os.environ.get('DB_PATH')
+    return str(path)
+
+
+def insert_db(name):
+    try:
+        f = open(db_path(), "a")
+        f.write(name + "\n")
+        f.close()
+    except:
+        pass
