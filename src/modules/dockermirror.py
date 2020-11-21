@@ -42,7 +42,10 @@ def run(config_file):
             print(ValueError)
 
         # Create ECR repository on AWS if not exists
-        dorepo.run(repository=repository)
+        try:
+            dorepo.run(repository=repository)
+        except ValueError:
+            print(ValueError)
 
         # Check if "image_target" repo/image is present on DB file. If not pull the image
         try:
