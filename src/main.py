@@ -13,7 +13,10 @@ handler.setFormatter(formatter)
 root.addHandler(handler)
 
 # Login to ecr
-ecrlogin.login_docker_client_to_aws_ecr()
+try:
+    ecrlogin.login_docker_client_to_aws_ecr()
+except ValueError:
+    print(ValueError)
 
 # # Run mirroring
 try:
