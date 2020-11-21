@@ -14,6 +14,7 @@ root.addHandler(handler)
 
 # Login to ecr
 ecrlogin.login_docker_client_to_aws_ecr()
+
 # # Run mirroring
 dockermirror.run('config.ini')
 
