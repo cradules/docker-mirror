@@ -66,6 +66,7 @@ docker run  --privileged -v ${HOME}/db:/db -e AWS_DEFAULT_REGION=<aws region> -e
       - To refers mirrored images every day - refresh = 1d
       - To refers mirrored every 1 week - refresh = 1w .. and so on.
       - To refresh mirrored images never - refresh = never
+- Implement helm chart so the DMI can run inside kubernetes cluster.
 - Implement support for others Cloud providers:
   - Google
   - Azure
