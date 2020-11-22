@@ -32,13 +32,18 @@ def timer(value):
 
 if time_period == 'm':
     schedule.every(timer(interval)).minutes.do(dockermirror.run)  # Run every n minutes
-
 elif time_period == "d":
     schedule.every(timer(interval)).days.do(dockermirror.run)  # Run every n days
 elif time_period == "w":
     schedule.every(timer(interval)).weeks.do(dockermirror.run)  # Run every n weeks
+elif interval == 0:
+    dockermirror.run()
+else:
+    print("Incorrect refresh value. Accepted values are: 0, <n>m, <n>d, <n>w, where n is a positive integer")
+    exit(128)
+schedule.run_all()  # Running initial mirroring
 
-schedule.run_all()  # First run
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+if not interval == 0:
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
