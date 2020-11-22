@@ -1,4 +1,4 @@
 docker~=4.3.1
 configparser~=5.0.1
 subprocess32~=3.5.4
-boto3~=1.16.21
+boto3~=1.16.23
