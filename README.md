@@ -20,6 +20,9 @@ The solution is working around a provided config.ini file where you need to spec
 - Create filed config.ini in src folder with the form:
 
 ```ini
+[DEFAULT]
+refresh = 1w
+
 [aws/proxyv2]
 image = proxyv2
 tag = 1.7.0
