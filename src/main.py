@@ -1,7 +1,10 @@
 import logging
 import sys
-import dmecrlogin
 import dockermirror
+import time
+import schedule
+import configparser
+import re
 
 # Log information to stdout. Change log level from "root.setLevel"
 root = logging.getLogger()
@@ -13,23 +16,29 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 root.addHandler(handler)
 
-# Login to ecr
-try:
-    dmecrlogin.login_docker_client_to_aws_ecr()
-except ValueError:
-    print(ValueError)
-
-# # Run mirroring
-try:
-    dockermirror.run('config.ini')
-except ValueError:
-    print(ValueError)
+# Collect interval and time period from config.ini schedule section
+config = configparser.ConfigParser()
+config.read('config.ini')
+refresh = config['DEFAULT']['refresh']  # Read refresh value
+interval = int(re.sub('[^0-9]', '', refresh))  # Construct refresh interval
+time_period = (re.sub('[^A-Z-a-z]', '', refresh))  # Construct refresh period
 
 
+# Define timer for scheduler
+def timer(value):
+    when = value
+    return when
 
 
+if time_period == 'm':
+    schedule.every(timer(interval)).minutes.do(dockermirror.run)  # Run every n minutes
 
+elif time_period == "d":
+    schedule.every(timer(interval)).days.do(dockermirror.run)  # Run every n days
+elif time_period == "w":
+    schedule.every(timer(interval)).weeks.do(dockermirror.run)  # Run every n weeks
 
-
-
-
+schedule.run_all()  # First run
+while True:
+    schedule.run_pending()
+    time.sleep(1)
