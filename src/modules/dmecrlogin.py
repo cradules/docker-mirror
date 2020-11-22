@@ -1,14 +1,14 @@
 import base64
 import subprocess
 import boto3
-import misc
+import dmmisc
 
 
 # Login to ECR AWS Function. This will use credentials from ENV or you credential files from ~/.aws/credentials
 
 def login_docker_client_to_aws_ecr():
     # Create boto3 ECR client
-    ecr_client = boto3.client('ecr', region_name=misc.aws_default_region())
+    ecr_client = boto3.client('ecr', region_name=dmmisc.aws_default_region())
 
     token = ecr_client.get_authorization_token()
     username, password = base64.b64decode(token['authorizationData'][0]['authorizationToken']).decode().split(':')

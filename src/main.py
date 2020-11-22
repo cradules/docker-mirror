@@ -1,7 +1,8 @@
 import logging
 import sys
+import dmecrlogin
 import dockermirror
-import ecrlogin
+
 # Log information to stdout. Change log level from "root.setLevel"
 root = logging.getLogger()
 root.setLevel(logging.INFO)  # Here you can change the log level
@@ -14,7 +15,7 @@ root.addHandler(handler)
 
 # Login to ecr
 try:
-    ecrlogin.login_docker_client_to_aws_ecr()
+    dmecrlogin.login_docker_client_to_aws_ecr()
 except ValueError:
     print(ValueError)
 

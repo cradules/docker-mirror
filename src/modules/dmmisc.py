@@ -1,5 +1,4 @@
 import os
-import pathlib
 
 
 def aws_default_region():
