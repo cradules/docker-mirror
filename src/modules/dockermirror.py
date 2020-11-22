@@ -12,7 +12,8 @@ def run():
     # Read variables from config.ini. This implies that only config.ini should be modified for mirroring new images
     config = configparser.ConfigParser()
     config.read('config.ini')
-    dmecrlogin.login_docker_client_to_aws_ecr()  # Login to ECR
+    if dmmisc.cloud() == 'AWS':
+        dmecrlogin.login_docker_client_to_aws_ecr()  # Login to ECR
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     today = date.today()
