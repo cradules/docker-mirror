@@ -1,18 +1,24 @@
 import configparser
-import pathlib
 import docker
 import dmecr
+import dmecrlogin
 import dmmisc
+from datetime import date, datetime
 
 
-def run(config_file):
+def run():
     # Create docker client
     docker_client = docker.from_env()
-    file = pathlib.Path(dmmisc.db_path())
-
     # Read variables from config.ini. This implies that only config.ini should be modified for mirroring new images
     config = configparser.ConfigParser()
-    config.read(config_file)
+    config.read('config.ini')
+    dmecrlogin.login_docker_client_to_aws_ecr()  # Login to ECR
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    today = date.today()
+    day = today.strftime("%B %d, %Y")
+    print(day + " " + current_time)
+
     # Iterate trough config.ini
     for section in config.sections():
         items = dict(config[section])  # Create dictionary from config.ini sections
