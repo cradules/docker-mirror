@@ -1,8 +1,8 @@
-# Docker Mirror Images
+# Docker Mirror Image
 
 ## Description
 
-This is solution that will help you to mirror docker images for a repository to another.
+This is solution that will help you to mirror docker images form a repository to another.
 DMI ( docker mirror Images) was build to overcome the the situation where an environment ( like kubernetes) need images from
 docker hub, but as we know since 2 of November 2020, docker hub has implemented a [rate limit](https://www.docker.com/increase-rate-limits#:~:text=The%20rate%20limits%20will%20be,the%20six%20hour%20window%20elapses.).
 
@@ -12,7 +12,7 @@ At this moment the solution support just AWS ECR mirroring and support next task
 - create new repository in AWS ECR
 - push images to newly created AWS ECR
 - keep track of the mirror images
-
+- refresh mirrored images if is specified.
 
 
 # Requirements
@@ -69,10 +69,10 @@ The supported intervals are:
     - weeks
 
 The refresh interval is given by config.ini on [DEFAULT] section and supports next values:
-0 - will disable refresh
-[n]m - minutes. Where n is a positive integer
-[n]d - days.  Where n is a positive integer
-[n]w - weeks. Where n is a positive integer
+- 0 - will disable refresh
+- [n]m - minutes. Where n is a positive integer
+- [n]d - days.  Where n is a positive integer
+- [n]w - weeks. Where n is a positive integer
 
 
 
