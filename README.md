@@ -59,13 +59,27 @@ docker run  --privileged -v ${HOME}/db:/db -e AWS_DEFAULT_REGION=<aws region> -e
 
 ```
 
+- Scheduler. DMI is offering the possibility to refresh the mirrored imaged to a given time interval. 
+The supported intervals are:
+    - minutes
+    - days
+    - weeks
+
+The refresh interval is given by config.ini on [DEFAULT] section and supports next values:
+0 - will disable refresh
+[n]m - minutes. Where n is a positive integer
+[n]d - days.  Where n is a positive integer
+[n]w - weeks. Where n is a positive integer
+
+
+
 ### TODO:
-- Implement scheduler
+~~- Implement scheduler
     - The scheduler to be dictated by the user. 
       Ex: 
       - To refers mirrored images every day - refresh = 1d
       - To refers mirrored every 1 week - refresh = 1w .. and so on.
-      - To refresh mirrored images never - refresh = never
+      - To refresh mirrored images never - refresh = 0~~
 - Implement helm chart so the DMI can run inside kubernetes cluster.
 - Implement support for others Cloud providers:
   - Google
