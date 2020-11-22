@@ -4,4 +4,5 @@
 /etc/init.d/docker start
 
 # Start app
-python /app/main.py
+cd /app/src || exit
+python main.py
