@@ -82,6 +82,7 @@ Requirements:
     kubectl create secret generic  aws-dmi-secret \
     --from-literal=AWS_ACCESS_KEY_ID=<aws-access-key> \
     --from-literal=AWS_SECRET_ACCESS_KEY='<aws-secret-access-id>'
+    --from-literal=AWS_ACCOUNT='<aws-account-id>'
 ```
 
 ### TODO:
