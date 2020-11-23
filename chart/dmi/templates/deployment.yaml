@@ -44,6 +44,12 @@ spec:
                 secretKeyRef:
                   name: aws-dmi-secret
                   key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_ACCOUNT
+              valueFrom:
+                secretKeyRef:
+                  name: aws-dmi-secret
+                  key: AWS_ACCOUNT
+          {{- range $key, $value := .Values.env }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
