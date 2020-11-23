@@ -9,7 +9,7 @@ def aws_default_region():
 def ecr_host():
     aws_account = os.environ.get('AWS_ACCOUNT')
     if aws_account:
-        repository = (str(aws_account) + ".dkr.ecr.eu-central-1.amazonaws.com")
+        repository = (str(aws_account) + ".dkr.ecr." + aws_default_region() + ".amazonaws.com")
         return str(repository)
     else:
         exit(code=128)
