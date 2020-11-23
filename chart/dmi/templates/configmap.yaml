@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "dmi.fullname" . }}-config-ini
+data:
+{{- range  $val := toStrings .Values.config }}
+  config.ini: |-
+{{ $val | indent 4}}
+{{- end }}
