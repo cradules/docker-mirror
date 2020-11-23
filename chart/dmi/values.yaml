@@ -45,7 +45,7 @@ env:
 
 config: |-
   [DEFAULT]
-  refresh = 0
+  refresh = 4w
 
   [aws/proxyv2]
   image = proxyv2

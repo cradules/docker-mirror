@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "dmi.labels" . | nindent 4 }}
 spec:
+  strategy:
+    type: "Recreate"
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -16,6 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum | trunc 10}}
         {{- include "dmi.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
