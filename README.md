@@ -88,10 +88,10 @@ Requirements:
         Note: On AWS EKS cluster if the cluster has ECR policy attached the secrets should not be necessary. 
         This case is not tested yet. Soon I will test I will modify the chart so the secretes to be optionally.  
 
-   -  Environment Variables:
-       CLOUD: "<CLOUD>" - AWS, AZURE, GKE ( for the moment only AWS is supported)
-       DB_PATH: "/db/<file-name>"
-       AWS_DEFAULT_REGION: "<aws-region>"
+-  Environment Variables:
+    - CLOUD: "<CLOUD>"  AWS, AZURE, GKE ( for the moment only AWS is supported)
+    - DB_PATH: "/db/<file-name>"
+    - AWS_DEFAULT_REGION: "<aws-region>"
 
 
 ### TODO:
