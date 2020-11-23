@@ -73,6 +73,16 @@ The refresh interval is given by config.ini on [DEFAULT] section and supports ne
 - [n]w - weeks. Where n is a positive integer
 
 
+## HELM
+
+Requirements:
+- AWS
+    - Create secret for AWS ACCESS on the namespace where your are deploying the chart
+    ```shell script
+    kubectl create secret generic  aws-dmi-secret \
+    --from-literal=AWS_ACCESS_KEY_ID=<aws-access-key> \
+    --from-literal=AWS_SECRET_ACCESS_KEY='<aws-secret-access-id>'
+```
 
 ### TODO:
 ~~- Implement scheduler
