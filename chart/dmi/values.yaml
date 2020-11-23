@@ -36,6 +36,12 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+env:
+  CLOUD: AWS
+  DB_PATH: /db/repository.db
+  AWS_DEFAULT_REGION: eu-central-1
+
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
