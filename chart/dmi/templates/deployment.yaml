@@ -5,9 +5,7 @@ metadata:
   labels:
     {{- include "dmi.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "dmi.selectorLabels" . | nindent 6 }}
@@ -50,6 +48,15 @@ spec:
                   name: aws-dmi-secret
                   key: AWS_ACCOUNT
           {{- range $key, $value := .Values.env }}
+            - name: {{ $key | upper | replace "-" "_" }}
+              value: {{ $value | quote }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: /db
+              name: vol
+            - mountPath: /app/src/config.ini
+              name: vol-conf
+              subPath: config.ini
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -64,3 +71,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: vol
+          persistentVolumeClaim:
+            claimName: {{ template "dmi.fullname" . }}
+        - name: vol-conf
+          configMap:
+            name: {{ template "dmi.fullname" . }}-config-ini
+
