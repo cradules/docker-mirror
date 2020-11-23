@@ -89,9 +89,9 @@ Requirements:
         This case is not tested yet. Soon I will test I will modify the chart so the secretes to be optionally.  
 
 -  Environment Variables:
-    - CLOUD: "<CLOUD>"  AWS, AZURE, GKE ( for the moment only AWS is supported)
-    - DB_PATH: "/db/<file-name>"
-    - AWS_DEFAULT_REGION: "<aws-region>"
+    - CLOUD: "cloud provider"  AWS, AZURE, GKE ( for the moment only AWS is supported)
+    - DB_PATH: "/db/file-name"
+    - AWS_DEFAULT_REGION: "aws-region"
 
 
 ### TODO:
