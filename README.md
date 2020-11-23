@@ -83,18 +83,28 @@ Requirements:
     --from-literal=AWS_ACCESS_KEY_ID=<aws-access-key> \
     --from-literal=AWS_SECRET_ACCESS_KEY='<aws-secret-access-id>'
     --from-literal=AWS_ACCOUNT='<aws-account-id>'
-```
+    ```
+
+        Note: On AWS EKS cluster if the cluster has ECR policy attached the secrets should not be necessary. 
+        This case is not tested yet. Soon I will test I will modify the chart so the secretes to be optionally.  
+
+   -  Environment Variables:
+        -  CLOUD: <CLOUD> - AWS, AZURE, GKE ( for the moment only AWS is supported)
+        - DB_PATH: /db/<file-name>
+        - AWS_DEFAULT_REGION: <aws-region>
+
 
 ### TODO:
-~~- Implement scheduler
-    - The scheduler to be dictated by the user. 
+- Implement scheduler
+    ~~- The scheduler to be dictated by the user. 
       Ex: 
       - To refers mirrored images every day - refresh = 1d
       - To refers mirrored every 1 week - refresh = 1w .. and so on.
       - To refresh mirrored images never - refresh = 0~~
-- Implement helm chart so the DMI can run inside kubernetes cluster.
+~~- Implement helm chart so the DMI can run inside kubernetes cluster.~~
 - Implement support for others Cloud providers:
   - Google
   - Azure
 - Implement support to mirror from Cloud to cloud
 - Implement support to mirror images from sources that require authentication.
+- Check Readme.md
