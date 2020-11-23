@@ -6,9 +6,9 @@ replicaCount: 1
 
 image:
   repository: quanticera/dmi
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.1-beta"
+  tag: "0.0.5-beta"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -28,7 +28,8 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  privileged: true
   # capabilities:
   #   drop:
   #   - ALL
@@ -41,6 +42,44 @@ env:
   DB_PATH: /db/repository.db
   AWS_DEFAULT_REGION: eu-central-1
 
+
+config: |-
+  [DEFAULT]
+  refresh = 0
+
+  [aws/proxyv2]
+  image = proxyv2
+  tag = 1.7.0
+  source-repository = istio
+  project = istio
+
+  [aws/mixer]
+  image = mixer
+  tag = 1.7.0
+  source-repository = istio
+  project = istio
+
+  [aws/pilot]
+  image = pilot
+  tag = 1.7.0
+  source-repository = istio
+  project = istio
+
+
+## Persist data to a persistent volume
+persistence:
+  enabled: true
+  ## database data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  annotations: {}
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
