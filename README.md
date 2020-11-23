@@ -28,14 +28,12 @@ image = proxyv2
 tag = 1.7.0
 source-repository = istio
 project = istio
-region = eu-central-1
 
 [aws/mixer]
 image = mixer
 tag = 1.7.0
 source-repository = istio
 project = istio
-region = eu-central-1
 ```
 - Export for the environment that will used by docker container next env objects:
 
