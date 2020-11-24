@@ -65,6 +65,8 @@ def run():
                     dmmisc.insert_db(image_target)
                     docker_client.images.push(image_target)  # Push image to ecr
                     print('Successfully pushed image ', image_target, sep="")
+                    docker_client.images.remove(image_source, image_target)
+                    print('Successfully clean-up local storage')
                 else:
                     print('Image {} present on repository.db file'.format(image_source))
         except ValueError:
