@@ -56,7 +56,7 @@ docker build -t docker-mirror .
 - Run docker mirror on local machine:
 
 ```shell script
-docker run  --privileged -v ${HOME}/db:/db -e AWS_DEFAULT_REGION=<aws region> -e AWS_ACCOUNT=<aws account> -e CLOUD=AWS -e DB_PATH=/db/repository.db -e AWS_ACCESS_KEY_ID=<aws key id> -e AWS_SECRET_ACCESS_KEY=<aws accces key> docker-mirror
+docker run  --privileged -v <full path to>/db:/db -v <full pato to>/config.ini:/app/src/config.ini-e AWS_DEFAULT_REGION=<aws region> -e AWS_ACCOUNT=<aws account> -e CLOUD=AWS -e DB_PATH=/db/repository.db -e AWS_ACCESS_KEY_ID=<aws key id> -e AWS_SECRET_ACCESS_KEY=<aws accces key> docker-mirror
 
 ```
 
@@ -95,13 +95,13 @@ Requirements:
 
 
 ### TODO:
-- Implement scheduler
-    ~~- The scheduler to be dictated by the user. 
+~~- Implement scheduler
+    - The scheduler to be dictated by the user. 
       Ex: 
       - To refers mirrored images every day - refresh = 1d
       - To refers mirrored every 1 week - refresh = 1w .. and so on.
-      - To refresh mirrored images never - refresh = 0~~
-~~- Implement helm chart so the DMI can run inside kubernetes cluster.~~
+      - To refresh mirrored images never - refresh = 0 
+      - Implement helm chart so the DMI can run inside kubernetes cluster.~~
 - Implement support for others Cloud providers:
   - Google
   - Azure

@@ -8,7 +8,7 @@ image:
   repository: quanticera/dmi
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.5-beta"
+  tag: "0.1.0"
 
 imagePullSecrets: []
 nameOverride: ""
